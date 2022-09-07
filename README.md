@@ -12,4 +12,4 @@ hasKey(key) //check if a key exists, returns Boolean
 removeKey(key) //Delete a key from the DB
 ```
 
-
+Assign an AES Key to the "crypto" variable. It will not work otherways
