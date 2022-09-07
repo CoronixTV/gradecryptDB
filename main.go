@@ -1,15 +1,20 @@
-package gradecryptdb
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
+
+	"github.com/XbyOrange/xcrypt"
 )
+
+var crypto = []byte("")
 
 var (
 	newFile *os.File
 	err     error
 )
+
 
 func readKey(key string) string {
 	if hasKey(key) == true {
@@ -22,19 +27,28 @@ func readKey(key string) string {
 			log.Fatal(err)
 		}
 		ret := (string(data))
-		return ret
+		result, err := xcrypt.DecryptCBC(crypto, ret)
+		if err != nil {
+			fmt.Println(err)
+		}
+		return result
 	}
 	return ""
 }
 func addKey(key string, value string) {
-	if hasKey(key) == false {
+	ciphertext, err := xcrypt.EncryptCBC(crypto, value)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	if !hasKey(key) {
 		newFile, err = os.Create(key)
 		if err != nil {
 			log.Fatal(err)
 		}
 		log.Println(newFile)
 		newFile.Close()
-		err2 := ioutil.WriteFile(key, []byte(value), 0666)
+		err2 := ioutil.WriteFile(key, []byte(ciphertext), 0666)
 		if err2 != nil {
 			log.Fatal(err2)
 		}
