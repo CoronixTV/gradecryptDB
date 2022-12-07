@@ -12,7 +12,7 @@ hasKey(key, dir) //check if a key exists, returns Boolean
 removeKey(key, dir) //Delete a key from the DB
 addKeyUnsafe(key, dir //Add a key and it's Value without encryption
 readKey(key, dir) //Get the value from an unsafe Key, returns String 
-//Dir is the directory the File is safed in (e.g. addKey("joemama", "pswd132", "Users/UnfunnyUserNames")
+//Dir is the directory the file is stored in (e.g. addKey("joemama", "pswd132", "Users/UnfunnyUserNames")
 ```
 
 Assign an AES Key (Random Bytes) to the "crypto" variable. Only the unsafe functions will work otherways
